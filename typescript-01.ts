@@ -1,11 +1,22 @@
 // Declaring different types
 let helloWorld: string = 'Hello World';
 let myNum: number;
+let myArray: Array<any> = [1, '3'];
+let myObj: Object;
+myObj = { name: 'yey' }
+
+let undeclared: any = 'Yo' // TypeScript will infer types for you
+undeclared = 1;
 
 myNum = 42;
 
 console.log(helloWorld);
 console.log(myNum);
+
+const myUser = {
+  name: "john",
+  id: 43345
+}
 
 // Creating an interface for objects
 interface User {
@@ -13,6 +24,7 @@ interface User {
   id: number;
 }
 
+// You can then declare that a JavaScript object conforms to the shape of your new interface by using syntax like : TypeName after a variable declaration:
 const user: User = {
   name: 'Michael',
   id: 50
