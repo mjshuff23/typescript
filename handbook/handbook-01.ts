@@ -51,3 +51,47 @@ function printName(obj: { first: string; last?: string; }) {
 
 printName({ first: "Michael" });
 printName({ first: "Michael", last: "Shuff" });
+
+
+// Union Types
+// a type formed from two or more other types, representing values that may be any one of those types. We refer to each of these types as the union’s members.
+
+function printId(id: number | string) {
+  console.log(`Your id is ${id}`);
+}
+
+
+printId(202);
+printId('2123');
+
+/* Allows you to do things with the union if that thing is valid for every member of the union. For
+    example, if you have the union string | number, you can’t use methods that are only
+    available on string:
+
+  function printId(id: number | string) {
+    console.log(id.toUpperCase());
+    Property 'toUpperCase' does not exist on type 'string | number'.
+    Property 'toUpperCase' does not exist on type 'number'.
+  }
+
+   Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.
+ */
+
+function welcomePeople(x: string[] | string) {
+  Array.isArray(x) ? console.log(`Hello, ${x.join(" and ")}`) : console.log(`Welcome lone traveler, ${x}`);
+}
+
+welcomePeople("john");
+welcomePeople([ "john", "mike", "joe" ]);
+
+/*
+  Sometimes you’ll have a union where all the members have something in common. For example, both arrays and strings have a slice method. If every member in a union has a property in common, you can use that property without narrowing:
+*/
+
+// Return type is inferred as number[] | string
+function getFirstThree(x: number[] | string) {
+  return x.slice(0, 3);
+}
+
+console.log(getFirstThree([ 1, 2, 3 ]));
+console.log(getFirstThree("1 2 3"));
