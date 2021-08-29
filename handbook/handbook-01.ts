@@ -95,3 +95,40 @@ function getFirstThree(x: number[] | string) {
 
 console.log(getFirstThree([ 1, 2, 3 ]));
 console.log(getFirstThree("1 2 3"));
+
+/*                            Aliases
+  Sometimes you’ll have a union where all the members have something in common. For example, both arrays and strings have a slice method. If every member in a union has a property in common, you can use that property without narrowing:
+*/
+type Point = {
+  x: number;
+  y: number;
+};
+
+// Exactly the same as the earlier example
+function printCoords(pt: Point) {
+  console.log(`x: ${pt.x}`);
+  console.log(`y: ${pt.y}`);
+}
+
+printCoordinates({ x: 100, y: 100 });
+
+/*
+  You can actually use a type alias to give a name to any type at all, not just an object type. For example, a type alias can name a union type:
+*/
+type ID = number | string;
+type UserInputSanitizedString = string;
+
+function sanitizeInput(str: string): UserInputSanitizedString {
+  return sanitize(str);
+}
+
+// Create a sanitized input
+let userInput = sanitizeInput(getInput());
+
+// Can still be re-assigned with a string though
+userInput = "new input";
+
+
+/*                                    Interfaces
+    An interface declaration is another way to name an object type:
+*/
